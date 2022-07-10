@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_07_10_195308) do
     t.bigint "account_receiver_id", null: false
     t.decimal "amount", null: false
     t.decimal "fee"
+    t.string "type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_receiver_id"], name: "index_transactions_on_account_receiver_id"
