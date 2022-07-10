@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_10_184609) do
+ActiveRecord::Schema.define(version: 2022_07_10_195308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2022_07_10_184609) do
     t.decimal "balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "account_sender_id", null: false
+    t.bigint "account_receiver_id", null: false
+    t.decimal "amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_receiver_id"], name: "index_transactions_on_account_receiver_id"
+    t.index ["account_sender_id"], name: "index_transactions_on_account_sender_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +49,6 @@ ActiveRecord::Schema.define(version: 2022_07_10_184609) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "transactions", "bank_accounts", column: "account_receiver_id"
+  add_foreign_key "transactions", "bank_accounts", column: "account_sender_id"
 end
