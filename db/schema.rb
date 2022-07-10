@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2022_07_10_195308) do
     t.decimal "balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -45,12 +47,11 @@ ActiveRecord::Schema.define(version: 2022_07_10_195308) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "phone", null: false
-    t.bigint "bank_account_id"
-    t.index ["bank_account_id"], name: "index_users_on_bank_account_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bank_accounts", "users"
   add_foreign_key "transactions", "bank_accounts", column: "account_receiver_id"
   add_foreign_key "transactions", "bank_accounts", column: "account_sender_id"
 end
