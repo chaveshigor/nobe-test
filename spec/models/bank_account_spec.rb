@@ -5,6 +5,8 @@ RSpec.describe BankAccount, type: :model do
 
   describe 'Assossiations' do
     it { should belong_to(:user) }
+    it { should have_many(:sended) }
+    it { should have_many(:received) }
   end
 
   describe 'Validations' do
