@@ -1,0 +1,11 @@
+<p>show action</p>
+<div>
+  <p>Saldo: <%=@bank_account.balance%></p>
+  <% @bank_account.transactions.each do |transaction| %>
+    <p> R$<%=transaction.amount.round(2) %> - <%=transaction.transaction_type %> </p>
+  <% end %>
+  <button>Fazer depósito</button>
+  <button>Fazer saque</button>
+  <button>Fazer transferência</button>
+  <button>Exportar extrato</button>
+</div>
