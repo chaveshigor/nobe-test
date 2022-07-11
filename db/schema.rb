@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_07_10_195308) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "account_number"
-    t.decimal "balance"
+    t.decimal "balance", default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
