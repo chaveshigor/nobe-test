@@ -1,20 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let!(:user) { create(:user) }
+
   describe 'Assossiations' do
     it { should have_one(:bank_account) }
   end
 
   describe 'Validations' do
-    subject {
-      User.new(
-        first_name: 'Son',
-        last_name: 'Goku',
-        phone: '21789654123',
-        password: 'kamehameha',
-        email: 'goku@test.com'
-      )
-    }
+    subject { user }
+
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
 
