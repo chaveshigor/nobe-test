@@ -1,16 +1,17 @@
 <h1>Realizar transação</h1>
+
 <%= form_with model: @transaction do |form| %>
   <div>
     <%= form.label :tipo_de_transação %>
-    <%= form.select :transaction_type, Transaction.transaction_types.to_a.insert(0, ['Selecione', '']) %>
+    <%= form.select :transaction_type, options_for_select(Transaction.transaction_types.to_a), { prompt: 'Selecione' }, { required: true } %>
   </div>
   <div>
     <%= form.label :valor %>
-    <%= form.text_field :amount %>
+    <%= form.number_field :amount, {required: true, } %>
   </div>
   <div id='account_receiver_number_field' style='display: none'>
     <%= form.label :número_da_conta_recebedora %>
-    <%= form.text_field :account_receiver_number %>
+    <%= form.number_field :account_receiver_number %>
   </div>
   <div>
     <%= form.submit %>
