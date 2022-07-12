@@ -20,7 +20,8 @@ module TransactionServices
         amount: amount
       )
 
-      new_balance, fee = TransactionServices::CalculateBalanceService.new(transaction_type, amount, current_balance).run
+      fee = calculate_fee(amount)
+      new_balance = current_balance - (fee + amount)
       return error_response('Saldo insuficiente') if new_balance.negative?
 
       new_transaction.fee = fee
