@@ -39,5 +39,21 @@ RSpec.describe TransactionServices::SendMoneyService do
         expect(result[:message]).to eq('Saldo insuficiente')
       end
     end
+
+    context 'when receiver account does not exist' do
+      let!(:transaction_params) {{
+        transaction_type: 'SEND',
+        amount: 1,
+        current_user: bank_account_sender.user,
+        account_receiver_number: '123'
+      }}
+
+      it 'return error' do
+        result = described_class.new.run(transaction_params)
+
+        expect(result[:success]).to eq(false)
+        expect(result[:message]).to eq("Conta #{transaction_params[:account_receiver_number]} não encontrada")
+      end
+    end
   end
 end
