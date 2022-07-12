@@ -1,5 +1,5 @@
 module TransactionServices
-  class DrawMoneyService
+  class DrawMoneyService < TransactionBaseService
     def run(transaction_params)
       draw_money(transaction_params)
     end
@@ -21,12 +21,12 @@ module TransactionServices
       )
 
       new_balance, fee = TransactionServices::CalculateBalanceService.new(transaction_type, amount, current_balance).run
-      return false if new_balance.negative?
+      return error_response('Saldo insuficiente') if new_balance.negative?
 
       new_transaction.fee = fee
       bank_account.update(balance: new_balance)
 
-      new_transaction
+      success_response(new_transaction)
     end
   end
 end
