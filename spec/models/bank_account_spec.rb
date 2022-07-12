@@ -12,7 +12,7 @@ RSpec.describe BankAccount, type: :model do
   describe 'Validations' do
     subject { bank_account }
 
-    it { should validate_uniqueness_of(:account_number) }
+    it { should validate_uniqueness_of(:account_number).ignoring_case_sensitivity }
     it { should validate_numericality_of(:balance).is_greater_than_or_equal_to(0) }
   end
 end
