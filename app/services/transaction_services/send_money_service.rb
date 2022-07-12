@@ -26,7 +26,7 @@ module TransactionServices
       new_balance_sender = current_balance_sender - (amount + fee)
       return error_response('Saldo insuficiente') if new_balance_sender.negative?
 
-      new_balance_receiver = current_balance_receiver + amount - fee
+      new_balance_receiver = current_balance_receiver + amount
       new_transaction.fee = fee
 
       bank_account_sender.update(balance: new_balance_sender)
