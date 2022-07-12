@@ -4,8 +4,6 @@
   <% @bank_account.transactions.each do |transaction| %>
     <p> R$<%=transaction.amount.round(2) %> - <%=transaction.transaction_type %> </p>
   <% end %>
-  <button>Fazer depósito</button>
-  <button>Fazer saque</button>
-  <button>Fazer transferência</button>
+  <%= link_to 'Realizar transação', new_transaction_path %>
   <button>Exportar extrato</button>
 </div>
