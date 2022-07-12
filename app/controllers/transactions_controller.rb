@@ -1,22 +1,19 @@
 class TransactionsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @transaction = Transaction.new
   end
 
   def create
-    current_balance = BankAccount.find_by(id: account_sender_id).balance
-    account_receiver = BankAccount.find_by(account_number: transaction_params[:account_receiver_number])
+    create_transaction_params = transaction_params
+    create_transaction_params[:current_user] = current_user
+    new_transaction = TransactionServices::CreateTransactionService.new(create_transaction_params).run
 
-    transaction = Transaction.new
-    transaction.account_sender_id = @current_user.bank_account.id
-    transaction.account_receiver_id = account_receiver.id
-    transaction.transaction_type = transaction_params[:transaction_type]
-    transaction.amount = transaction_params[:amount]
+    return redirect_to show_account_path if new_transaction && new_transaction&.save
 
-    result = Services::TransactionServices::CalculateBalance.new(transaction, current_balance).run
-    # retornar erro se result = false
-    transaction.fee = result[1]
-    transaction.save
+    flash.alert = 'Você não possui saldo suficiente para efetuar a transação'
+    redirect_to action: :new
   end
 
   private
