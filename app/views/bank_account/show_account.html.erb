@@ -1,20 +1,36 @@
 <div class='container-fluid bank-account'>
   <div class='row'>
     <div class='col-12'>
-      <h1>Bem-vindo <%=current_user.first_name.titleize%>!</h1>
+      <h1>Bem-vindo(a) <%=current_user.first_name.titleize%>!</h1>
     </div>
   </div>
 
   <div class='row mb-4 balance-info'>
-    <div class='row mt-4'>
-      <div class='col-12'>
-        <span>Saldo</span>
+    <div class='col-2'>
+      <div class='row mt-4'>
+        <div class='col-12'>
+          <span>Saldo</span>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-12'>
+          <h2 class='display-6'><%=number_to_currency(@bank_account.balance, unit: 'R$', separator: ',')%></h2>
+        </div>
       </div>
     </div>
 
-    <div class='row'>
-      <div class='col-12'>
-        <h2 class='display-6'><%=number_to_currency(@bank_account.balance, unit: 'R$', separator: ',')%></h2>
+    <div class='col-4'>
+      <div class='row mt-4'>
+        <div class='col-12'>
+          <span>Conta</span>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-12'>
+          <h2 class='display-6'><%=@bank_account.account_number%></h2>
+        </div>
       </div>
     </div>
   </div>
