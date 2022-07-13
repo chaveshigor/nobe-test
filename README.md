@@ -3,6 +3,9 @@
 ### Pode ser visto no video abaixo uma demonstração do projeto:
 https://youtu.be/h4xWMp8QA9o
 
+### Link do projeto no heroku:
+https://nobe-test.herokuapp.com
+
 ### Esse projeto tem como finalidade simular transações bancarias de forma online, tendo como funcionalidades as seguintes transações:
 
 - Depósito para qualquer conta
