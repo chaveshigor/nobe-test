@@ -1,9 +1,78 @@
-<p>show action</p>
-<div>
-  <p>Saldo: <%=@bank_account.balance%></p>
-  <% @bank_account.transactions.each do |transaction| %>
-    <p> R$<%=transaction.amount.round(2) %> - <%=transaction.transaction_type %> </p>
-  <% end %>
-  <%= link_to 'Realizar transação', new_transaction_path %>
-  <button>Exportar extrato</button>
+<%= render partial: 'shared/header' %>
+
+<div class='container-fluid bank-account'>
+  <div class='row'>
+    <div class='col-12'>
+      <h1>Bem-vindo <%=current_user.first_name.titleize%>!</h1>
+    </div>
+  </div>
+
+  <div class='row mb-4 balance-info'>
+    <div class='row mt-4'>
+      <div class='col-12'>
+        <span>Saldo</span>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-12'>
+        <h2 class='display-6'><%=number_to_currency(@bank_account.balance, unit: 'R$', separator: ',')%></h2>
+      </div>
+    </div>
+  </div>
+
+  <div class='row mb-4'>
+    <div class='col-2'>
+      <%= link_to 'Realizar transação', new_transaction_path, class: "btn button-new-transaction" %>
+    </div>
+    <div class='col-10'></div>
+  </div>
+
+  <div class='row d-flex align-items-end'>
+    <div class='col-6'>
+      <span>Transações</span>
+    </div>
+    <div class='col-6 d-flex justify-content-end'>
+      <%= link_to 'Exportar CSV', new_transaction_path, class: "btn button-new-transaction" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class='row'>
+    <%= form_for show_account_path, method: :get do |form| %>
+      <div class='col-6'>
+        <%= form.label :data_inicial%>
+        <%= form.date_field :initial_date %>
+        <%= form.label :data_final%>
+        <%= form.date_field :final_date %>
+        <%= form.submit :filtrar%>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <table class="table table-borderless mt-4">
+      <thead>
+        <tr>
+          <th scope="col">Tipo de transação</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Taxa</th>
+          <th scope="col">Destinatário</th>
+          <th scope="col">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions&.each do |transaction| %>
+          <tr>
+            <td><%=transaction.transaction_type %></td>
+            <td><%=number_to_currency(transaction.amount, unit: 'R$', separator: ',')%></td>
+            <td><%=number_to_currency(transaction.fee, unit: 'R$', separator: ',')%></td>
+            <td><%=transaction.account_receiver.user.full_name %></td>
+            <td><%=DateTime.parse(transaction.created_at.to_s).strftime("%d/%m/%Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
