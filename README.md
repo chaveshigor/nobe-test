@@ -1,24 +1,44 @@
-# README
+# Nobe Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Esse projeto tem como finalidade simular transações bancarias de forma online, tendo como funcionalidades as seguintes transações:
 
-Things you may want to cover:
+- Depósito para qualquer conta
+- Saque
+- Transferência entre contas
 
-* Ruby version
+### Outras funcionalidades são:
 
-* System dependencies
+- Congelamento da conta
+- Verificação e filtragem de extrato por data
+- Download de extrato no formato csv
 
-* Configuration
+## Regras de negócio:
 
-* Database creation
+- Para realizar qualquer transação, o usuário precisa estar autenticado
+- Depósito:
+  - É possível depositar em qualquer conta ativa
+- Saque:
+  - É possível realizar saques apenas da própria conta
+  - É possível realizar saques apenas caso o valor do saque, somado a taxa da transação não seja superior ao valor em conta
+  - Não é possível realizar saques em contas desativadas
+- Transferência:
+  - É possível realizar trasnferências para qualquer conta ativa
+  - Contas desativadas não podem realizar transferências
+  - É possível realizar transferências apenas caso o valor transferido, somado a taxa da transação não seja superior ao valor em conta
 
-* Database initialization
 
-* How to run the test suite
+## Instruções para rodar o projeto
 
-* Services (job queues, cache servers, search engines, etc.)
+### Dependências:
+- Ruby
+- Ruby on Rails
+- Yarn
+- Docker
+- Docker Compose
 
-* Deployment instructions
-
-* ...
+### Executar:
+- Clonar o projeto
+- Executar o comando `yarn install`
+- Executar o comando `bundle install`
+- Executar o comando `docker-compose build`
+- Executar o comando `docker-compose up`
