@@ -57,5 +57,22 @@ RSpec.describe TransactionServices::DepositMoneyService do
         expect(result[:message]).to eq("Conta #{transaction_params[:account_receiver_number]} não encontrada")
       end
     end
+
+    context 'when receiver account is not actived' do
+      let!(:transaction_params) {{
+        transaction_type: 'DEPOSIT',
+        amount: 20,
+        current_user: bank_account_sender.user,
+        account_receiver_number: bank_account_receiver.account_number
+      }}
+
+      it 'return error' do
+        bank_account_receiver.update(active: false)
+        result = described_class.new.run(transaction_params)
+
+        expect(result[:success]).to eq(false)
+        expect(result[:message]).to eq('Conta de destino está inativa')
+      end
+    end
   end
 end

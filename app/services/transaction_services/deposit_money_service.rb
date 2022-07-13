@@ -13,6 +13,7 @@ module TransactionServices
       bank_account_sender = transaction_params[:current_user].bank_account
       bank_account_receiver = BankAccount.find_by(account_number: transaction_params[:account_receiver_number])
       return error_response("Conta #{transaction_params[:account_receiver_number]} não encontrada") if bank_account_receiver.nil?
+      return error_response('Conta de destino está inativa') unless bank_account_receiver.active
 
       current_balance_receiver = bank_account_receiver.balance
 
