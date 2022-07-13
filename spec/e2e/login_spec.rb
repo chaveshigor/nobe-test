@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Hello world', type: :system do
+RSpec.describe 'Login', type: :system do
   describe 'index page' do
     let!(:user) { create(:user, :with_bank_account) }
 
