@@ -1,19 +1,42 @@
-<%= form_with model: @transaction do |form| %>
-  <div>
-    <%= form.label :tipo_de_transação %>
-    <%= form.select :transaction_type, options_for_select(Transaction.transaction_types.to_a), { prompt: 'Selecione' }, { required: true } %>
-  </div>
-  <div>
-    <%= form.label :valor %>
-    <%= form.number_field :amount, {required: true, } %>
-  </div>
-  <div id='account_receiver_number_field' style='display: none'>
-    <%= form.label :número_da_conta_recebedora %>
-    <%= form.number_field :account_receiver_number %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class='container-fluid bank-account'>
+  <%= form_with model: @transaction do |form| %>
+    <div class='row mb-3'>
+      <div class='col-2'>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Tipo de transação</label>
+          </div>
+          <%= form.select :transaction_type, options_for_select(Transaction.transaction_types.to_a), { prompt: 'Selecione' }, { required: true } %>
+        </div>
+      </div>
+    </div>
+
+    <div class='row mb-3'>
+      <div class='col-2'>
+        <div class="input-group input-group-default">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Valor</span>
+          </div>
+          <%= form.number_field :amount, {required: true, class:'form-control', step: 0.01} %>
+        </div>
+      </div>
+    </div>
+
+    <div class='row mb-3' id='account_receiver_number_field' style='display: none'>
+      <div class='col-2'>
+        <div class="input-group input-group-default">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Conta recebedora</span>
+          </div>
+          <%= form.number_field :account_receiver_number, {class:'form-control'} %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= form.submit class: 'btn button-new-transaction' %>
+    </div>
+  <% end %>
+</div>
 
 <%= javascript_pack_tag 'newTransaction'%>

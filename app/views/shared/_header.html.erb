@@ -5,7 +5,7 @@
 
   <%if current_user%>
     <div class='col-6 d-flex justify-content-end'>
-      <%= button_to 'Sair', destroy_user_session_path(current_user), method: :delete, class: 'btn btn-primary b-0'%>
+      <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-primary b-0'%>
     </div>
   <%end%>
 </nav>

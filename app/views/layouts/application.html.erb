@@ -18,6 +18,9 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= yield %>
+
+    <div class='container-fluid bank-account'>
+      <%= yield %>
+    </div>
   </body>
 </html>
