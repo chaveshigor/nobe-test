@@ -45,7 +45,7 @@
     <%= form_for show_account_path, method: :get do |form| %>
       <div class='col-6'>
         <%= form.label :data_inicial%>
-        <%= form.date_field :initial_date, value: @initial_date %>
+        <%= form.date_field :initial_date %>
         <%= form.label :data_final%>
         <%= form.date_field :final_date %>
         <%= form.submit :Pesquisar, class: "btn button-new-transaction"%>
