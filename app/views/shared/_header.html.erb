@@ -1,3 +1,11 @@
-<nav class="navbar-default">
-  <span class="navbar-brand mb-0 h1">NOBE BANK</span>
+<nav class="navbar-default row d-flex align-items-end">
+  <div class='col-6'>
+    <span class="navbar-brand mb-0 h1 col-6">NOBE BANK</span>
+  </div>
+
+  <%if current_user%>
+    <div class='col-6 d-flex justify-content-end'>
+      <%= button_to 'Sair', destroy_user_session_path(current_user), method: :delete, class: 'btn btn-primary b-0'%>
+    </div>
+  <%end%>
 </nav>
