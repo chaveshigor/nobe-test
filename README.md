@@ -1,5 +1,8 @@
 # Nobe Test
 
+### Pode ser visto no video abaixo uma demonstração do projeto:
+https://youtu.be/h4xWMp8QA9o
+
 ### Esse projeto tem como finalidade simular transações bancarias de forma online, tendo como funcionalidades as seguintes transações:
 
 - Depósito para qualquer conta
@@ -25,9 +28,13 @@
   - É possível realizar trasnferências para qualquer conta ativa
   - Contas desativadas não podem realizar transferências
   - É possível realizar transferências apenas caso o valor transferido, somado a taxa da transação não seja superior ao valor em conta
+- Taxa:
+  - De segunda a sexta das 9 às 18 horas a taxa é de 5 reais por transferência
+  - Fora desse horário a taxa é de 7 reais
+  - Acima de 1000 reais há um adicional de 10 reais na taxa
 
 
-## Instruções para rodar o projeto
+## Instruções para executar o projeto
 
 ### Dependências:
 - Ruby
