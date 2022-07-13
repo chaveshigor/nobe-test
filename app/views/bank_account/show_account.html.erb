@@ -32,9 +32,11 @@
     <div class='col-6'>
       <span>Transações</span>
     </div>
-    <div class='col-6 d-flex justify-content-end'>
-      <%= link_to 'Exportar CSV', new_transaction_path, class: "btn button-new-transaction" %>
-    </div>
+    <%if params[:'/show_account']%>
+      <div class='col-6 d-flex justify-content-end'>
+        <%= link_to 'Exportar', show_account_path(initial_date: params[:'/show_account'][:initial_date], final_date: params[:'/show_account'][:final_date], format: :csv), class: "btn button-new-transaction" %>
+      </div>
+    <%end%>
   </div>
 
   <hr>
@@ -43,10 +45,10 @@
     <%= form_for show_account_path, method: :get do |form| %>
       <div class='col-6'>
         <%= form.label :data_inicial%>
-        <%= form.date_field :initial_date %>
+        <%= form.date_field :initial_date, value: @initial_date %>
         <%= form.label :data_final%>
         <%= form.date_field :final_date %>
-        <%= form.submit :filtrar%>
+        <%= form.submit :Pesquisar, class: "btn button-new-transaction"%>
       </div>
     <% end %>
   </div>

@@ -1,0 +1,7 @@
+<%- headers = ['Tipo de transação', 'Valor', 'Taxa', 'Destinatário', 'Data'] -%>
+<%= CSV.generate_line headers %>
+<% @transactions_to_export.each do |transaction| %>
+  <%= CSV.generate_line(
+    [transaction.transaction_type, transaction.amount, transaction.fee, transaction.account_receiver.user.full_name, transaction.created_at]
+  ) -%>
+<% end %>
