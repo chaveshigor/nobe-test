@@ -35,5 +35,16 @@ RSpec.describe TransactionServices::CreateTransactionService do
         end
       end
     end
+
+    context 'when my account is not actived' do
+      it 'return error' do
+        bank_account_sender.active = false
+        payload = build_params('SEND')
+        result = described_class.new(payload).run
+
+        expect(result[:success]).to eq(false)
+        expect(result[:message]).to eq('Sua conta está inativa')
+      end
+    end
   end
 end

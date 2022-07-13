@@ -1,5 +1,5 @@
 module TransactionServices
-  class CreateTransactionService
+  class CreateTransactionService < TransactionBaseService
     OPERATIONS = {
       DRAW: TransactionServices::DrawMoneyService,
       DEPOSIT: TransactionServices::DepositMoneyService,
@@ -10,6 +10,8 @@ module TransactionServices
     end
 
     def run
+      return error_response('Sua conta está inativa') unless transaction_params[:current_user].bank_account.active
+
       transaction_type = transaction_params[:transaction_type]
       transaction_type = Transaction.transaction_types.key(transaction_type.to_i).to_sym
       transaction_params[:transaction_type] = transaction_type
@@ -18,6 +20,5 @@ module TransactionServices
     end
 
     attr_reader :transaction_params
-
   end
 end
