@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #EFEFEF;
+}
+
+.navbar-default{
+  max-width: 100vw;
+  background-color: #47DCAF;
+  box-shadow: 0px 3px 15px 5px rgba(71, 220, 175, 0.5);
+  padding: 20px 30px;
+  color: #EFEFEF;
+  font-weight: 900;
+  margin-bottom: 2em;
+}
