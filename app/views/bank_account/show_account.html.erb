@@ -35,12 +35,14 @@
     </div>
   </div>
 
-  <div class='row mb-4'>
-    <div class='col-2'>
-      <%= link_to 'Realizar transação', new_transaction_path, class: "btn button-new-transaction" %>
+  <%if @bank_account.active%>
+    <div class='row mb-4'>
+      <div class='col-2'>
+        <%= link_to 'Realizar transação', new_transaction_path, class: "btn button-new-transaction" %>
+      </div>
+      <div class='col-10'></div>
     </div>
-    <div class='col-10'></div>
-  </div>
+  <%end%>
 
   <div class='row d-flex align-items-end'>
     <div class='col-6'>

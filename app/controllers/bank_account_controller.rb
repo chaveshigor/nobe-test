@@ -23,8 +23,13 @@ class BankAccountController < ApplicationController
     end
   end
 
-  def initial_date
-    @initial_date || params[:'/show_account'][:initial_date]
+  def change_bank_account_status
+    user_id = current_user.id
+    bank_account = User.find(user_id).bank_account
+    current_status = bank_account.active?
+
+    bank_account.update(active: !current_status)
+    redirect_to show_account_path(current_user, format: :html)
   end
 
   private

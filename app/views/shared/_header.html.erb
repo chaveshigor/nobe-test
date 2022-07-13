@@ -5,7 +5,16 @@
 
   <%if current_user%>
     <div class='col-6 d-flex justify-content-end'>
-      <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-primary b-0'%>
+      <div class='p-1'>
+        <%if current_user.bank_account.active%>
+          <%= link_to 'Desativar conta', change_account_status_path(current_user), method: :put, class: 'btn btn-primary mr-1'%>
+        <%else%>
+          <%= link_to 'Ativar conta', change_account_status_path(current_user), method: :put, class: 'btn btn-primary mr-1'%>
+        <%end%>
+      </div>
+      <div class='p-1'>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-primary b-0'%>
+      </div>
     </div>
   <%end%>
 </nav>
